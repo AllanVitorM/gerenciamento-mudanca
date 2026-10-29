@@ -19,7 +19,7 @@ services:
       - postgres_data:/var/lib/postgresql
 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app_user -d gerenciamento_mudancas"]
+      test: ["CMD-SHELL", "pg_isready -U app_user -d gerenciamento_mudanca"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -45,4 +45,7 @@ services:
 
 volumes:
   postgres_data:
+    name: ${POSTGRES_VOLUME:-gerenciar_mudanca_postgres_data}
+
   pgadmin_data:
+    name: ${PGADMIN_VOLUME:-gerenciar_mudanca_pgadmin_data}
