@@ -2,7 +2,6 @@ package br.com.gerenciamentomudancasapi.model;
 
 import java.time.OffsetDateTime;
 import jakarta.persistence.*;
-import jakarta.validation.groups.Default;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
