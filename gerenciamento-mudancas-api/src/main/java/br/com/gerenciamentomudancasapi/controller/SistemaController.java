@@ -1,5 +1,7 @@
 package br.com.gerenciamentomudancasapi.controller;
 
+import br.com.gerenciamentomudancasapi.dto.sistema.AtualizarNomeSistemaRequest;
+import br.com.gerenciamentomudancasapi.dto.sistema.AtualizarStatusSistemaRequest;
 import br.com.gerenciamentomudancasapi.dto.sistema.CriarSistemaRequest;
 import br.com.gerenciamentomudancasapi.model.Sistema;
 import br.com.gerenciamentomudancasapi.service.SistemaService;
@@ -51,6 +53,31 @@ public class SistemaController {
     ) {
         Sistema sistema = sistemaService.buscarSistemaPorId(id);
 
+        return ResponseEntity.ok(sistema);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Sistema> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody AtualizarNomeSistemaRequest request
+    ) {
+        Sistema sistema = sistemaService.atualizarSistema(
+                id,
+                request.nome()
+        );
+
+        return ResponseEntity.ok(sistema);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Sistema> atualizarStatus(
+            @PathVariable Integer id,
+            @Valid @RequestBody AtualizarStatusSistemaRequest request
+    ){
+        Sistema sistema = sistemaService.atualizarStatus(
+                id,
+                request.ativo()
+        );
         return ResponseEntity.ok(sistema);
     }
 }

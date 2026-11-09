@@ -11,4 +11,5 @@ public interface SistemaRepository
     Optional<Sistema> findByNome(String nome);
 
     List<Sistema> findByAtivo(Boolean ativo);
+
 }
