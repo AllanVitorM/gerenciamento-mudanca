@@ -81,4 +81,48 @@ public class SistemaServiceTest {
         verify(repository).findByNome(nomeNormalizado);
 
     }
+
+    @Test
+    void deveDesativarSistema(){
+        SistemaRepository repository = mock(SistemaRepository.class);
+
+        SistemaService service = new SistemaService(repository);
+
+        Sistema sistema = new Sistema("teste");
+
+        when(repository.findById(1))
+                .thenReturn(Optional.of(sistema));
+
+        when(repository.save(sistema))
+                .thenReturn(sistema);
+
+        Sistema resultado = service.atualizarStatus(1, false);
+
+        assertEquals(false, resultado.getAtivo());
+
+        verify(repository).save(sistema);
+        verify(repository).findById(1);
+    }
+
+    @Test
+    void deveAtivarSistema(){
+        SistemaRepository repository = mock(SistemaRepository.class);
+        SistemaService service = new SistemaService(repository);
+
+        Sistema sistema = new Sistema("teste");
+        sistema.desativar();
+
+        when(repository.findById(1))
+                .thenReturn(Optional.of(sistema));
+
+        when(repository.save(sistema))
+                .thenReturn(sistema);
+
+        Sistema resultado = service.atualizarStatus(1, true);
+
+        assertEquals(true, resultado.getAtivo());
+
+        verify(repository).save(sistema);
+        verify(repository).findById(1);
+    }
 }
